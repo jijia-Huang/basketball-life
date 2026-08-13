@@ -1,5 +1,10 @@
 # Wiki Log
 
+## [2026-08-13] update | Basketball Life v0.1.10：生涯成長與大學路線
+- Release: https://jijia-huang.github.io/basketball-life/
+- Commit: `b6643e1`
+- Status: GitHub Pages deployment verified
+
 ## [2026-08-13] ingest | Basketball Life v0.1.0：首個可玩籃球版
 - Disposition: New
 - Raw: raw/game-development/2026-08-13-basketball-life-v0-1-0.md
