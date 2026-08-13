@@ -1,20 +1,17 @@
 # Basketball Life / 籃球人生模擬器
 
-`basketball-life` 是從 [YaKyoLife](https://github.com/leoggcat/yakyulife) 衍生的種子化籃球員生涯模擬器。目前處於規格階段：既有 `index.html` 仍是原始棒球版本，尚未開始籃球化實作。
+從 16 歲開始，靠身高成長、訓練、打法與生涯選擇，走完一名籃球員的人生。遊戲是無依賴的單一 `index.html`，手機瀏覽器可直接遊玩。
 
-## 規格文件
+- 線上版：https://jijia-huang.github.io/basketball-life/
+- [完整玩法規格](GAME_DESIGN_DOCUMENT.md)
+- [賽季數據與成就算法](BALANCE_AND_FORMULAS.md)
 
-- [遊戲設計企劃](GAME_DESIGN_DOCUMENT.md)：玩家流程、世界、系統、介面與驗收範圍。
-- [數值與公式](BALANCE_AND_FORMULAS.md)：身材、能力、位置、數據、選秀、傷病、獎項與名人堂算法。
+## 本機執行
 
-兩份文件共同構成第一版的完整規格；若文字敘述與公式衝突，以 `BALANCE_AND_FORMULAS.md` 為準。
+直接開啟 `index.html`，或在目錄執行 `python -m http.server 8000`。
 
-## 授權與來源
+公式煙霧測試：開啟 `?selftest=1`，畫面顯示 `Selftest PASS` 即通過。
 
-本專案沿用原作的 [CC BY-NC 4.0](LICENSE) 授權，僅限非商業使用並須保留姓名標示。
+## 授權與原作
 
-- 原作：YaKyoLife / 棒球人生模擬器
-- 原作者：最先生 Mr.TheMost
-- 原始碼：https://github.com/leoggcat/yakyulife
-
-Copyright (c) 2026 最先生
+本作衍生自 [YaKyoLife](https://github.com/leoggcat/yakyulife)，延續 [CC BY-NC 4.0](LICENSE)；原作者為最先生 Mr.TheMost。
