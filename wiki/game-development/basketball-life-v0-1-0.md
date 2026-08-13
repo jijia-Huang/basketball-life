@@ -1,7 +1,7 @@
 # Basketball Life v0.1.0：首個可玩籃球版
 
 > Sources: Basketball Life project, 2026-08-13
-> Raw: [Basketball Life v0.1.0 implementation snapshot](../../raw/game-development/2026-08-13-basketball-life-v0-1-0.md)
+> Raw: [Basketball Life v0.1.0 implementation snapshot](../../raw/game-development/2026-08-13-basketball-life-v0-1-0.md); [Basketball Life v0.1.1 original-interface restoration](../../raw/game-development/2026-08-13-basketball-life-v0-1-1-original-ui.md)
 > Updated: 2026-08-13
 
 ## Overview
@@ -21,6 +21,10 @@ Basketball Life v0.1.0 已把原本的職棒生涯頁面改造成可在手機直
 ## 驗收狀態
 
 內建公式自測已通過；手機瀏覽器也已完成開局、訓練、打法選擇、事件與一季結算，未發現頁面程式錯誤或橫向溢位。固定種子由網址查詢參數控制，讓相同出身和相同選擇能重現相同人生。
+
+## 原版操作回歸
+
+後續的 v0.1.1 保留籃球規則，但恢復原作的深綠記分板、四格生涯看板、季初／賽季中／季末燈號、桌面三欄、時間軸、四種主題與手機底部操作區。訓練再次分成骰子揭示和能力分配兩步；當前骰會高亮，已用骰會淡出，復原會同時還原能力與骰子，全部分配後才顯示確認。
 
 ## See Also
 
