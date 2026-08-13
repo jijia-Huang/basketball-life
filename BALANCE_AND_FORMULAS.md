@@ -605,6 +605,7 @@ MajorShare = clamp(12 + max(0,LoadEnd-60)×.8
 
 ```text
 ProductionRating = clamp(50 + (BVI-LeagueAverageBVI)×1.2,20,80)
+LeagueAverageBVI = 高中:18, 大學:34, TW:27, JP2:28, JP1:30, EUD:29, EUT:32, GL:31, NBA:34
 AgeBonus = 19歲:+4, 20歲:+2, 21歲:0, 22歲:-3
 SizeRarity = clamp((BodyFit-50)×.10,-3,3)
 ScoutNoise = ri(-4,4)
