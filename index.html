@@ -56,7 +56,7 @@ h1{font-size:34px;line-height:1.2;margin:18px 0 8px;letter-spacing:.05em}h1 span
 
 <script>
 "use strict";
-const VERSION="v0.1.14";
+const VERSION="v0.1.15";
 let SEED=new URLSearchParams(location.search).get("seed")||Math.random().toString(36).slice(2,10),_rng=0,S=null;
 function seedInit(s){_rng=1779033703;for(let i=0;i<s.length;i++){_rng=Math.imul(_rng^s.charCodeAt(i),3432918353);_rng=_rng<<13|_rng>>>19}}
 function R(){_rng|=0;_rng=_rng+0x6D2B79F5|0;let t=Math.imul(_rng^_rng>>>15,1|_rng);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}
@@ -131,7 +131,7 @@ function graduationChoice(){card("高中畢業",`你已完成 ${ORIGINS[S.origin
 function careerChoice(){const opts=[{t:"申報美職籃選秀",s:"一生只有一次；可能首輪、次輪或落選",f:runDraft}];if(S.stage==="AM"&&!S.college)opts.push({t:"加入本地職業聯盟",s:"先累積比賽經驗，未來仍可旅外",f:()=>sign(localLeague(),3)});opts.push(S.stage==="PRO"?{t:"繼續目前球季",s:"保留選秀資格，完成本季賽程",f:offChoice}:S.college?{t:"繼續大學生涯",s:`留在 ${S.team}；季末依表現獲得能力點`,f:offChoice}:{t:"進入大學",s:"加入大學球隊，保留選秀資格",f:enterCollege});actions(S.college?"大學生涯選擇":"選擇下一步",opts)}
 function localLeague(){return{TW:"TW",US:"GL",JP:"JP1",EU:"EUD"}[S.origin]}
 function potentialOVR(){const old=S.ab;S.ab=S.pot;const v=baseOVR();S.ab=old;return v}
-function draftScore(noise=ri(-4,4)){const p=positionData(),body=.75*p.hf[p.main]+.25*p.wf[p.main],size=clamp((body-50)*.1,-3,3),lg=S.career.at(-1)?.league||"AM",avg=lg==="AM"?(S.college?34:18):{TW:27,JP2:28,JP1:30,EUD:29,EUT:32,GL:31,NBA:34}[lg],prod=clamp(50+((S.prevBVI??avg)-avg)*1.2,20,80),age={19:4,20:2,21:0,22:-3}[S.age]??-3;return .45*impact()+.25*potentialOVR()+.20*prod+age+size-S.injuries*2-Math.max(0,S.load-70)*.08+noise}
+function draftScore(noise=ri(-4,4)){const p=positionData(),body=.75*p.hf[p.main]+.25*p.wf[p.main],size=clamp((body-50)*.1,-3,3),lg=S.career.at(-1)?.league||"AM",avg=lg==="AM"?(S.college?34:18):{TW:27,JP2:28,JP1:30,EUD:29,EUT:32,GL:31,NBA:34}[lg],prod=clamp(50+((S.prevBVI??avg)-avg)*1.2,20,80),age={19:8,20:5,21:0,22:-3}[S.age]??-3;return .45*impact()+.25*potentialOVR()+.20*prod+age+size-S.injuries*2-Math.max(0,S.load-70)*.08+noise}
 function draftResult(score,r=R()*100){if(score>=75)return"lottery";if(score>=70)return r<65?"lottery":r<95?"first":"second";if(score>=65)return r<15?"lottery":r<75?"first":r<95?"second":"none";if(score>=60)return r<30?"first":r<85?"second":"none";if(score>=55)return r<5?"first":r<50?"second":"none";return r<1?"second":"none"}
 function runDraft(after=offChoice){S.declared=true;const score=draftScore(),result=draftResult(score);if(result!=="none"){S.drafted=true;let num=score>=88?1:result==="lottery"?clamp(Math.round(14-(score-75))+ri(-2,2),1,14):result==="first"?clamp(Math.round(30-(score-60)*1.5)+ri(-2,2),15,30):clamp(Math.round(60-(score-55)*2)+ri(-2,2),31,60);const tm=pick(TEAMS.NBA);card("美職籃選秀",`球探評分 ${score.toFixed(1)}。第 <b>${num}</b> 順位，${tm} 選中了你！`,"gold");S.team=tm;S.league="NBA";S.stage="PRO";S.contract=result==="second"?2:4;S.salaryMult=1;after()}else{card("選秀落選",`球探評分 ${score.toFixed(1)}。六十個名字唸完，沒有你的名字。這不是生涯終點。`,"bad");if(S.stage==="PRO")return actions("落選後選擇",[{t:`留在 ${S.team}`,s:"保留現有合約，繼續本季",f:after}]);actions("落選後選擇",[{t:"加入 G League",f:()=>sign("GL",2,after)},{t:"轉戰本地職籃",f:()=>sign(localLeague(),2,after)},{t:"前往歐洲",f:()=>sign("EUD",2,after)}])}}
 function sign(lg,years,after=offChoice){if(S.contract>0)return false;S.league=lg;S.stage="PRO";S.team=pick(TEAMS[lg]);S.contract=years;S.salaryMult=1;card("簽下職業合約",`加盟 <b>${S.team}</b>，合約 ${years} 年。`,"good");updateBoard();after();return true}
